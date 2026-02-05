@@ -1,7 +1,7 @@
 # AI Interaction Protocol
-**Project:** Taller_Diagnostico  
-**Team:** majoymajo team  
-**Duration:** 2 days  
+**Project:** Budget Management App 
+**Team:** Jacob,Majo,Agus 
+**Duration:** 2.5 days  
 **Last Updated:** 2026-02-05
 
 ---
@@ -9,21 +9,20 @@
 ## 1. Methodology
 
 ### Agile-DevOps Hybrid Approach
-For this 2-day intensive app development project, we combine lightweight Agile practices with DevOps principles:
+For this 2.5-day intensive app development project, we combine lightweight Agile practices with DevOps principles:
 
 #### **Agile Adaptation (Scrum-inspired)**
-Given our 2-day constraint, we adapt Scrum to micro-sprints:
+Given our 2.5-day constraint, we adapt Scrum to micro-sprints:
 
 - **Sprint Duration:** 1 day per sprint (2 total sprints)
 - **Daily Standup:** 2-hour daily meeting (detailed structure in Section 4)
-- **Sprint Planning:** 30 minutes at project start and Day 2 beginning
+- **Sprint Planning:** 1-hour 30 minutes at project start 
 - **Sprint Review/Retro:** 20 minutes at end of each day
 
 **Day 1 Sprint Goals:**
 - Project setup and architecture
-- Core functionality development
-- Basic UI/UX implementation
-
+- Time planning and structure of the project
+  
 **Day 2 Sprint Goals:**
 - Feature completion
 - Testing and bug fixes
@@ -37,8 +36,8 @@ Given our 2-day constraint, we adapt Scrum to micro-sprints:
 - **Monitoring:** Track app performance and errors from day one
 
 #### **AI Integration**
-- Use AI assistants (GitHub Copilot, ChatGPT, etc.) as team members
-- Apply prompt engineering best practices
+- GitHub Copilot and Open Code as team members
+- Apply prompt engineering best practices https://docs.github.com/es/copilot/concepts/prompting/prompt-engineering
 - Validate all AI-generated outputs
 - Document AI interactions for team learning
 
@@ -169,26 +168,6 @@ Use [testing framework]. Aim for >80% code coverage.
 
 ---
 
-### Interaction Guidelines
-
-✅ **DO:**
-- Provide full context (project, file, tech stack)
-- Be specific about requirements and constraints
-- Ask for explanations of AI reasoning
-- Request multiple approaches when appropriate
-- Validate and test all AI outputs
-- Iterate and refine based on results
-
-❌ **DON'T:**
-- Use vague prompts like "make it better" or "fix this"
-- Copy-paste without understanding
-- Share sensitive data (API keys, passwords, personal info)
-- Blindly trust AI outputs without validation
-- Skip testing AI-generated code
-- Use AI to bypass learning fundamentals
-
----
-
 ## 3. Key Documents and Context
 
 ### A. Project Context Documents
@@ -204,9 +183,7 @@ Maintain these key documents in the repository:
 ├── 📄 DEPLOYMENT.md                → Deployment process and environments
 ├── 📄 TESTING_GUIDE.md             → Testing strategy and commands
 ├── 📄 PROMPT_LIBRARY.md            → Successful prompts and patterns
-└── 📁 docs/
-    ├── DAILY_MEETING_NOTES.md      → Meeting summaries and decisions
-    └── LESSONS_LEARNED.md          → Insights and retrospective notes
+
 ```
 
 ---
@@ -218,16 +195,16 @@ Before requesting AI assistance, gather this information:
 ```markdown
 ## Context for AI Interaction
 
-**Project**: Taller_Diagnostico
+**Project**: Budget Management App
 **Repository**: majoymajo/Taller_Diagnostico
 **Task**: [What you're trying to achieve]
 **Current file**: [Full file path]
 **Related files**: [Other relevant files]
 **Tech Stack**: 
-  - Language: [e.g., JavaScript, Python]
-  - Framework: [e.g., React, Django]
-  - Database: [e.g., PostgreSQL, MongoDB]
-  - Other libraries: [List key dependencies]
+  - Language: [JAVA]
+  - Framework: [React, Sprint]
+  - Broker : Rabbit MQ
+  - Infra: Docker
 **Constraints**: [Limitations, requirements, deadlines]
 **Previous attempts**: [What you've already tried]
 **Error message** (if applicable): [Full error with stack trace]
@@ -245,53 +222,30 @@ Before requesting AI assistance, gather this information:
 
 ---
 
-### D. Required Context Checklist
-
-Before asking AI, ensure you have:
-
-- [ ] **Project name and repository**: majoymajo/Taller_Diagnostico
-- [ ] **Current file path**: Full path from project root
-- [ ] **Task description**: Clear, specific objective
-- [ ] **Tech stack**: Languages, frameworks, libraries
-- [ ] **Constraints**: Time limits, requirements, dependencies
-- [ ] **Related code**: Connected files or functions
-- [ ] **Error messages**: Full text if debugging
-- [ ] **Expected outcome**: What success looks like
-
----
-
 ## 4. Interaction Dynamics
 
 ### A. Project Phases Structure
 
 Our 2-day project follows these phases:
 
-#### **Phase 1: Beginning - Project Setup (Day 1, Morning)**
+#### **Phase 1: Beginning - Project Setup (Day 1, Afternoon)**
 **Duration:** 2-3 hours  
 **Activities:**
 - Environment setup
 - Repository initialization
 - Architecture design
 - Tech stack configuration
-- Initial AI prompts for boilerplate
+- Initial AI prompts 
 
 **AI Interaction Focus:**
 - Project structure generation
 - Configuration file creation
-- Boilerplate code
 - Setup documentation
-
-**Example Prompts:**
-```
-"Create a [framework] project structure for a [app type] app with the following features:
-[list features]. Include folder structure, configuration files, and a README with setup 
-instructions."
-```
 
 ---
 
-#### **Phase 2: Code and Develop (Day 1 Afternoon - Day 2 Morning)**
-**Duration:** 8-10 hours  
+#### **Phase 2: Code and Develop ( Day 2 Morning)**
+**Duration:** 2-5 hours  
 **Activities:**
 - Feature implementation
 - Component/module development
@@ -305,46 +259,6 @@ instructions."
 - Code improvement
 - Documentation
 
-**Prompt Engineering Strategy** (based on best practices):
-
-1. **Context-First Prompting**
-   ```
-   "In the context of [project], working on [feature], using [tech stack],
-   I need to [specific task] while considering [constraints]."
-   ```
-
-2. **Chain-of-Thought Prompting**
-   ```
-   "Let's solve this step by step:
-   1. First, [step 1]
-   2. Then, [step 2]
-   3. Finally, [step 3]
-   
-   Show your reasoning for each step."
-   ```
-
-3. **Few-Shot Prompting**
-   ```
-   "Here's an example of our code style:
-   [example 1]
-   
-   Now create a similar [component/function] for [new feature]."
-   ```
-
-4. **Role-Based Prompting**
-   ```
-   "Act as a senior [framework] developer. Review this code and suggest improvements
-   following industry best practices and [framework] conventions."
-   ```
-
-5. **Constraint-Driven Prompting**
-   ```
-   "Create [feature] with these strict requirements:
-   - Must use [specific library]
-   - Must handle [edge cases]
-   - Must be compatible with [environment]
-   - Must follow [pattern/standard]"
-   ```
 
 **Development Workflow:**
 ```
@@ -376,17 +290,6 @@ instructions."
 - Code improvement
 - Security analysis
 
-**Example Prompts:**
-```
-"Generate comprehensive test suite for [component/module] including:
-- Unit tests for all functions
-- Integration tests for API calls
-- Edge cases and error scenarios
-- Mock data and fixtures
-
-Use [testing framework] and aim for 80%+ coverage."
-```
-
 **Testing Checklist:**
 - [ ] All functions have unit tests
 - [ ] API endpoints tested
@@ -398,7 +301,7 @@ Use [testing framework] and aim for 80%+ coverage."
 
 ---
 
-#### **Phase 4: Conclusion and Deployment (Day 2, End)**
+#### **Phase 4: Conclusion and Deployment (Day 3, End)**
 **Duration:** 1-2 hours  
 **Activities:**
 - Final bug fixes
@@ -420,149 +323,11 @@ Use [testing framework] and aim for 80%+ coverage."
 - [ ] Prompt library with successful patterns
 
 ---
-
-### B. Daily Meeting Structure
-
-**Duration:** 2 hours daily  
-**Timing:** Start of each day (Day 1 and Day 2)
-
-#### **Meeting Agenda:**
-
-**1. Standup (15 minutes)**
-Each team member shares:
-- What I completed yesterday / plan to complete today
-- What I'm working on next
-- Blockers or challenges
-- AI interactions that helped/didn't help
-
-**2. Knowledge Sharing - Prompt Engineering (45 minutes)**
-- **Review successful prompts** from previous work session
-- **Analyze ineffective prompts** and discuss improvements
-- **Live demonstration** of advanced prompt techniques
-- **Practice session**: Team members craft prompts together
-- **Update PROMPT_LIBRARY.md** with new patterns
-
-**Format:**
-```markdown
-### Successful Prompt Pattern
-
-**Context:** [When to use this]
-**Prompt Template:**
-```
-[Actual prompt with placeholders]
-```
-**Result:** [What it achieved]
-**Tips:** [Key factors for success]
-```
-
-**3. Sprint Planning / Review (30 minutes)**
-- **Day 1:** Plan Day 1 tasks, assign responsibilities
-- **Day 2:** Review Day 1 completion, plan Day 2 tasks
-
-**4. Technical Discussion (20 minutes)**
-- Architecture decisions
-- Tech stack challenges
-- Code improvement opportunities
-- AI-assisted solutions
-
-**5. Action Items & Commitments (10 minutes)**
-- Assign tasks
-- Set deadlines
-- Identify dependencies
-- Schedule check-ins
-
----
-
-### C. Collaboration Dynamics
-
-#### **Pair Programming with AI**
-- **Navigator:** Writes prompts, guides AI interaction
-- **Driver:** Reviews code, validates responses, integrates code
-- **Switch roles** every 30-45 minutes
-- **Document learnings** in shared notes
-
-#### **Code Improvement with AI**
-```
-1. Developer completes feature
-2. Create Pull Request
-3. Run AI code improvement: "Review this PR for improvements in [aspects]"
-4. Address AI suggestions
-5. Human team review
-6. Merge after 2 approvals (as per branch protection rules)
-```
-
 #### **Knowledge Sharing**
 - **Daily 2-hour meetings** with structured prompt engineering focus
 - **Real-time documentation** of effective prompts in PROMPT_LIBRARY.md
 - **Shared learning log** in DAILY_MEETING_NOTES.md
 - **End-of-project retrospective** capturing lessons learned
-
-**Prompt Library Structure:**
-```markdown
-# Prompt Library
-
-## Code Generation Prompts
-### [Prompt Name]
-- **Use Case:** [When to use]
-- **Template:** [Prompt with variables]
-- **Success Rate:** [How often it works]
-- **Notes:** [Tips and variations]
-
-## Debugging Prompts
-[Same structure]
-
-## Testing Prompts
-[Same structure]
-```
-
----
-
-### D. Escalation Protocol
-
-When AI doesn't provide satisfactory results:
-
-```
-Attempt 1: Rephrase with more context and specific constraints
-           ↓ (if unsuccessful)
-Attempt 2: Break down into smaller, atomic questions
-           ↓ (if unsuccessful)
-Attempt 3: Ask AI to explain reasoning, identify gaps in prompt
-           ↓ (if unsuccessful)
-Attempt 4: Consult team members in daily meeting
-           ↓ (if unsuccessful)
-Attempt 5: Research official documentation, Stack Overflow
-           ↓ (if unsuccessful)
-Attempt 6: Simplify approach or find alternative solution
-```
-
-**Time Limit:** Max 30 minutes per AI interaction before escalating
-
----
-
-### E. Quality Control
-
-#### **Validation Checklist for AI-Generated Code**
-Before integrating any AI output:
-
-- [ ] **Functionality:** Code runs without errors
-- [ ] **Tests:** All tests pass
-- [ ] **Standards:** Follows team coding conventions
-- [ ] **Security:** No vulnerabilities introduced
-- [ ] **Performance:** Acceptable speed and resource usage
-- [ ] **Documentation:** Code is commented and documented
-- [ ] **Understanding:** Team member can explain how it works
-- [ ] **Integration:** Works with existing codebase
-- [ ] **Dependencies:** No unnecessary libraries added
-
-#### **Code Review Process**
-1. AI generates code → Local testing
-2. Create PR → Automated CI checks
-3. AI code improvement → Address suggestions
-4. Human review (2 approvals required)
-5. Merge → Deploy to staging
-6. Final validation → Deploy to production
-
----
 
 ## 5. Quality Standards & Ethics
 
