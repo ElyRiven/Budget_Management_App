@@ -24,13 +24,13 @@ const transactionFormSchema = z.object({
   description: z.string().min(1, "La descripción es requerida"),
   amount: z.number().min(0.01, "El monto debe ser mayor a 0"),
   category: z.string().min(1, "La categoría es requerida"),
-  type: z.enum(["income", "expense"]),
+  type: z.enum(["INCOME", "EXPENSE"]),
   date: z.string().min(1, "La fecha es requerida"),
 })
 
 const categories = {
-  income: ["Salario", "Negocio", "Inversiones", "Otros"],
-  expense: ["Alimentación", "Transporte", "Vivienda", "Salud", "Educación", "Entretenimiento", "Otros"],
+  INCOME: ["Salario", "Negocio", "Inversiones", "Otros"],
+  EXPENSE: ["Alimentación", "Transporte", "Vivienda", "Salud", "Educación", "Entretenimiento", "Otros"],
 }
 
 interface TransactionFormProps {
@@ -46,7 +46,7 @@ export function TransactionForm({ onSubmit, isLoading, defaultValues }: Transact
       description: "",
       amount: 0,
       category: "",
-      type: "expense",
+      type: "EXPENSE",
       date: new Date().toISOString().split('T')[0],
     },
   })
@@ -69,8 +69,8 @@ export function TransactionForm({ onSubmit, isLoading, defaultValues }: Transact
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="income">Ingreso</SelectItem>
-                  <SelectItem value="expense">Egreso</SelectItem>
+                  <SelectItem value="INCOME">Ingreso</SelectItem>
+                  <SelectItem value="EXPENSE">Egreso</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

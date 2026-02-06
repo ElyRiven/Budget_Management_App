@@ -399,3 +399,44 @@ Actúa como Senior Frontend Developer. Tu objetivo es actualizar la implementaci
 1. Código actualizado de transactionService.ts (Limpio).
 2. Código actualizado de columns.tsx (Sin acciones).
 3. Código de TransactionPage.tsx con el buscador e integración de paginación.
+
+---
+
+# ROLE
+Actúa como Senior Frontend Developer. Tu tarea es sincronizar el frontend con el nuevo contrato de datos enviado por el Backend (Spring Boot Producer).
+
+# CONTEXTO DEL CAMBIO
+El objeto de transacción ha sido modificado en el backend. Ahora el JSON tiene la siguiente estructura:
+{
+   "transactionId": number,
+   "userId": string,
+   "type": "INCOME" | "EXPENSE",
+   "amount": number,
+   "category": string,
+   "date": string (ISO 8601),
+   "description": string
+}
+
+# TAREAS ESPECÍFICAS
+
+1. ACTUALIZACIÓN DE TIPOS (TypeScript):
+   - Modifica el archivo de tipos/interfaces (ej. src/shared/types/index.ts o el específico del módulo) para reflejar exactamente estos nombres de campos.
+
+2. REFACTORIZACIÓN DEL ADAPTER:
+   - Actualiza el adapter en src/modules/transactions/services/transactionService.ts para que mapee correctamente los datos de la API hacia la aplicación.
+   - Asegúrate de que no queden referencias a nombres de campos antiguos (como 'id' o 'user_id').
+
+3. AJUSTE DE COLUMNAS (Data Table):
+   - Actualiza src/modules/transactions/components/DataTable.tsx para que el accessorKey de cada columna coincida con los nuevos nombres del JSON (ej. de id a transactionId).
+
+4. FORMULARIO Y SCHEMAS:
+   - Verifica que el transactionSchema.ts (Zod) y el formulario coincidan con estos campos para que el POST sea exitoso.
+
+# REQUISITOS DE CALIDAD
+- Realiza una búsqueda global de los términos antiguos para asegurar que no queden errores de "undefined" en la UI.
+- Mantén el tipado estricto.
+
+# FORMATO DE SALIDA
+1. Código actualizado de la Interface de TypeScript.
+2. Código actualizado de transactionService.tsx.
+3. Código actualizado del servicio/adapter.

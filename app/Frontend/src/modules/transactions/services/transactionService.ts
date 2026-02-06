@@ -1,4 +1,4 @@
-import type { TransactionModel, TransactionReportModel } from '../types/transaction.types';
+import type { TransactionModel, TransactionReportModel, TransactionFormData } from '../types/transaction.types';
 import { transactionAdapter, transactionReportAdapter } from '../adapters/transaction.adapter';
 import httpClient from '../../../core/api/httpClient';
 import type { TransactionResponse, TransactionItemResponse } from '../types/transaction.types';
@@ -15,8 +15,7 @@ export const getTransactionItems = async (period?: string): Promise<TransactionM
     return response.data.map(transactionAdapter);
 };
 
-export const createTransaction = async (data: Omit<TransactionModel, 'id' | 'userId' | 'createdAt' | 'updatedAt'>): Promise<TransactionModel> => {
+export const createTransaction = async (data: TransactionFormData): Promise<TransactionModel> => {
     const response = await httpClient.post<TransactionItemResponse>('/transactions', data);
     return transactionAdapter(response.data);
 };
-

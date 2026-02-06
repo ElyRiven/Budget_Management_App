@@ -12,11 +12,15 @@ import { Input } from "../../../components/ui/input"
 import { useTransactions } from "../hooks/useTransactions"
 import { DataTable } from "../components/DataTable"
 import { TransactionForm } from "../components/TransactionForm"
+import { useUserStore } from "@/modules/auth"
 
 export function TransactionPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   
+  const { user } = useUserStore()
+  if (!user) return null
+
   const { 
     transactions, 
     isLoading, 
@@ -28,6 +32,7 @@ export function TransactionPage() {
   const handleCreateTransaction = (data: any) => {
     const formData = {
       ...data,
+      userId: user.uid,
       date: new Date(data.date),
     }
     createTransaction(formData)

@@ -92,13 +92,14 @@ export function DataTable({ data, searchQuery }: DataTableProps) {
                     {transaction.category}
                   </Badge>
                 </TableCell>
-                <TableCell className={`font-semibold ${transaction.type === "income" ? "text-green-600" : "text-red-600"
-                  }`}>
-                  {transaction.type === "income" ? "+" : "-"} {formatCurrency(transaction.amount)}
+                <TableCell className={`font-semibold ${
+                  transaction.type === "INCOME" ? "text-green-600" : "text-red-600"
+                }`}>
+                  {transaction.type === "INCOME" ? "+" : "-"} {formatCurrency(transaction.amount)}
                 </TableCell>
                 <TableCell>
-                  <Badge variant={transaction.type === "income" ? "default" : "destructive"}>
-                    {transaction.type === "income" ? "Ingreso" : "Egreso"}
+                  <Badge variant={transaction.type === "INCOME" ? "default" : "destructive"}>
+                    {transaction.type === "INCOME" ? "Ingreso" : "Egreso"}
                   </Badge>
                 </TableCell>
               </TableRow>
