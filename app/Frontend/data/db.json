@@ -1,0 +1,144 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "userId": "user123",
+      "amount": 15000,
+      "type": "income",
+      "category": "Salario",
+      "description": "Salario mensual",
+      "date": "2026-02-01",
+      "createdAt": "2026-02-01T10:00:00.000Z",
+      "updatedAt": "2026-02-01T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "userId": "user123",
+      "amount": 850.5,
+      "type": "expense",
+      "category": "Alimentación",
+      "description": "Supermercado Exito",
+      "date": "2026-02-03",
+      "createdAt": "2026-02-03T15:30:00.000Z",
+      "updatedAt": "2026-02-03T15:30:00.000Z"
+    },
+    {
+      "id": 3,
+      "userId": "user123",
+      "amount": 1200,
+      "type": "expense",
+      "category": "Vivienda",
+      "description": "Pago de arriendo",
+      "date": "2026-02-05",
+      "createdAt": "2026-02-05T09:00:00.000Z",
+      "updatedAt": "2026-02-05T09:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "userId": "user123",
+      "amount": 500,
+      "type": "income",
+      "category": "Negocio",
+      "description": "Proyecto freelance",
+      "date": "2026-02-07",
+      "createdAt": "2026-02-07T14:20:00.000Z",
+      "updatedAt": "2026-02-07T14:20:00.000Z"
+    },
+    {
+      "id": 5,
+      "userId": "user123",
+      "amount": 75,
+      "type": "expense",
+      "category": "Transporte",
+      "description": "Recarga TransMilenio",
+      "date": "2026-02-08",
+      "createdAt": "2026-02-08T07:45:00.000Z",
+      "updatedAt": "2026-02-08T07:45:00.000Z"
+    },
+    {
+      "id": 6,
+      "userId": "user123",
+      "amount": 350,
+      "type": "expense",
+      "category": "Salud",
+      "description": "Consulta médica",
+      "date": "2026-02-10",
+      "createdAt": "2026-02-10T11:15:00.000Z",
+      "updatedAt": "2026-02-10T11:15:00.000Z"
+    },
+    {
+      "id": 7,
+      "userId": "user123",
+      "amount": 89.99,
+      "type": "expense",
+      "category": "Entretenimiento",
+      "description": "Cine y palomitas",
+      "date": "2026-02-12",
+      "createdAt": "2026-02-12T20:30:00.000Z",
+      "updatedAt": "2026-02-12T20:30:00.000Z"
+    },
+    {
+      "id": 8,
+      "userId": "user123",
+      "amount": 45000,
+      "type": "income",
+      "category": "Inversiones",
+      "description": "Retorno de inversión",
+      "date": "2026-02-15",
+      "createdAt": "2026-02-15T16:45:00.000Z",
+      "updatedAt": "2026-02-15T16:45:00.000Z"
+    },
+    {
+      "id": 9,
+      "userId": "user123",
+      "amount": 45000,
+      "type": "income",
+      "category": "Inversiones",
+      "description": "Retorno de inversión",
+      "date": "2026-02-15",
+      "createdAt": "2026-02-15T16:45:00.000Z",
+      "updatedAt": "2026-02-15T16:45:00.000Z"
+    },
+    {
+      "id": 10,
+      "userId": "user123",
+      "amount": 45000,
+      "type": "income",
+      "category": "Inversiones",
+      "description": "Retorno de inversión",
+      "date": "2026-02-15",
+      "createdAt": "2026-02-15T16:45:00.000Z",
+      "updatedAt": "2026-02-15T16:45:00.000Z"
+    },
+    {
+      "id": 11,
+      "userId": "user123",
+      "amount": 45000,
+      "type": "income",
+      "category": "Inversiones",
+      "description": "Retorno de inversión",
+      "date": "2026-02-15",
+      "createdAt": "2026-02-15T16:45:00.000Z",
+      "updatedAt": "2026-02-15T16:45:00.000Z"
+    },
+    {
+      "id": 12,
+      "userId": "user123",
+      "amount": 45000,
+      "type": "income",
+      "category": "Inversiones",
+      "description": "Retorno de inversión",
+      "date": "2026-02-15",
+      "createdAt": "2026-02-15T16:45:00.000Z",
+      "updatedAt": "2026-02-15T16:45:00.000Z"
+    },
+    {
+      "id": "16ca",
+      "description": "Prueba",
+      "amount": 15,
+      "category": "Salario",
+      "type": "income",
+      "date": "2026-02-06T00:00:00.000Z"
+    }
+  ]
+}

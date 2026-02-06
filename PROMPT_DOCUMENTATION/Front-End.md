@@ -361,4 +361,41 @@ Actúa como Senior Frontend Developer experto en Diseño de Sistemas. Tu objetiv
 2. Código de TransactionTable.tsx.
 3. Código de TransactionForm.tsx (con Zod).
 
+---
 
+# ROLE
+Actúa como Senior Frontend Developer. Tu objetivo es actualizar la implementación de la tabla de transacciones en src/modules/transactions para incluir capacidades de paginación y búsqueda, eliminando cualquier funcionalidad de edición o borrado.
+
+# CONTEXTO TÉCNICO
+- UI: shadcn/ui (DataTable, Input, Button, Pagination).
+- Estado: TanStack Table para la lógica de la tabla.
+- API: transactionService.ts (Solo se usarán métodos GET y POST).
+- Requisito: Retirar los métodos 'Update' y 'Delete' tanto del servicio como de la interfaz (columnas).
+
+# TAREAS ESPECÍFICAS
+
+1. LIMPIEZA DE CÓDIGO (Refactor):
+   - Elimina los métodos updateTransaction y deleteTransaction de src/modules/transactions/services/transactionService.ts.
+   - En src/modules/transactions/components/columns.tsx, elimina la columna de "Acciones" (DropdownMenu) que permitía editar o borrar.
+
+2. IMPLEMENTACIÓN DE BÚSQUEDA (Filtering):
+   - Añade un Input de búsqueda sobre la tabla para filtrar transacciones por "Concepto" o "Descripción".
+   - Implementa el filtrado del lado del cliente utilizando la función onColumnFiltersChange de TanStack Table.
+
+3. IMPLEMENTACIÓN DE PAGINACIÓN:
+   - Añade los controles de paginación de shadcn debajo de la tabla (botones de Anterior, Siguiente y contador de páginas).
+   - Configura el estado inicial para mostrar 10 filas por página.
+
+4. UI REFINADA (TransactionPage.tsx):
+   - El encabezado solo debe mostrar el buscador y el botón "Nueva Transacción".
+   - Asegura que la tabla maneje correctamente el estado de "Sin resultados" cuando el filtro no coincida con ninguna transacción.
+
+# REQUISITOS DE CALIDAD
+- No dejes código muerto (Dead Code); si una función no se usa, elimínala.
+- El diseño debe mantenerse limpio y profesional siguiendo la estética de shadcn.
+- Todo el código debe ser Type-Safe.
+
+# FORMATO DE SALIDA
+1. Código actualizado de transactionService.ts (Limpio).
+2. Código actualizado de columns.tsx (Sin acciones).
+3. Código de TransactionPage.tsx con el buscador e integración de paginación.
