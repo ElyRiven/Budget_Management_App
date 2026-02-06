@@ -10,7 +10,7 @@
    **Analysis**: Clearly specifies the structure and content of each section. Prompts focusing on specific files yield better results.  
 
 3. **Debugging and Workflow Creation**
-The workflow failed in each step https://github.com/majoymajo/Taller_Diagnostico/actions/runs/21729111699.I think that it is because it is not approching the right files it is reviewing the main but what it needs to review is all branches with feature/* .And if the code passes the test approve the pullre quest other wise send the files in case of bugs to Github issues or write a feedback and reject the PR
+  **Prompt**:The workflow failed in each step https://github.com/majoymajo/Taller_Diagnostico/actions/runs/21729111699.I think that it is because it is not approching the right files it is reviewing the main but what it needs to review is all branches with feature/* .And if the code passes the test approve the pullre quest other wise send the files in case of bugs to Github issues or write a feedback and reject the PR
 Annotations
 2 errors
 Validate Code Quality
@@ -18,3 +18,4 @@ No file in /home/runner/work/Taller_Diagnostico/Taller_Diagnostico matched to [*
 Send Notifications & Generate Report
 Unhandled error: HttpError: Resource not accessible by integration.
 I want you to fix each part of the code that when the github action is executed it passes all the steps.
+  **Analysis**: This prompt provided the exact bugs presented and even links to give clear context of the problem.
