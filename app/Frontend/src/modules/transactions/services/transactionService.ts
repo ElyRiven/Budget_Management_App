@@ -1,16 +1,10 @@
-import type { TransactionModel, TransactionReportModel, TransactionFormData } from '../types/transaction.types';
-import { transactionAdapter, transactionReportAdapter } from '../adapters/transaction.adapter';
+import type { TransactionModel, TransactionFormData } from '../types/transaction.types';
+import { transactionAdapter } from '../adapters/transaction.adapter';
 import httpClient from '../../../core/api/httpClient';
-import type { TransactionResponse, TransactionItemResponse } from '../types/transaction.types';
+import type { TransactionItemResponse } from '../types/transaction.types';
 
-export const getTransactions = async (period?: string): Promise<TransactionReportModel> => {
-    const endpoint = period ? `/transactions?period=${period}` : '/transactions';
-    const response = await httpClient.get<TransactionResponse>(endpoint);
-    return transactionReportAdapter(response.data);
-};
-
-export const getTransactionItems = async (period?: string): Promise<TransactionModel[]> => {
-    const endpoint = period ? `/transactions?period=${period}` : '/transactions';
+export const getTransactionsByUser = async (userId: string, period?: string): Promise<TransactionModel[]> => {
+    const endpoint = period ? `/transactions?period=${period}` : `/transactions/user/${userId}`;
     const response = await httpClient.get<TransactionItemResponse[]>(endpoint);
     return response.data.map(transactionAdapter);
 };
