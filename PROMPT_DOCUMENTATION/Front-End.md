@@ -361,4 +361,121 @@ Actúa como Senior Frontend Developer experto en Diseño de Sistemas. Tu objetiv
 2. Código de TransactionTable.tsx.
 3. Código de TransactionForm.tsx (con Zod).
 
+---
 
+# ROLE
+Actúa como Senior Frontend Developer. Tu objetivo es actualizar la implementación de la tabla de transacciones en src/modules/transactions para incluir capacidades de paginación y búsqueda, eliminando cualquier funcionalidad de edición o borrado.
+
+# CONTEXTO TÉCNICO
+- UI: shadcn/ui (DataTable, Input, Button, Pagination).
+- Estado: TanStack Table para la lógica de la tabla.
+- API: transactionService.ts (Solo se usarán métodos GET y POST).
+- Requisito: Retirar los métodos 'Update' y 'Delete' tanto del servicio como de la interfaz (columnas).
+
+# TAREAS ESPECÍFICAS
+
+1. LIMPIEZA DE CÓDIGO (Refactor):
+   - Elimina los métodos updateTransaction y deleteTransaction de src/modules/transactions/services/transactionService.ts.
+   - En src/modules/transactions/components/columns.tsx, elimina la columna de "Acciones" (DropdownMenu) que permitía editar o borrar.
+
+2. IMPLEMENTACIÓN DE BÚSQUEDA (Filtering):
+   - Añade un Input de búsqueda sobre la tabla para filtrar transacciones por "Concepto" o "Descripción".
+   - Implementa el filtrado del lado del cliente utilizando la función onColumnFiltersChange de TanStack Table.
+
+3. IMPLEMENTACIÓN DE PAGINACIÓN:
+   - Añade los controles de paginación de shadcn debajo de la tabla (botones de Anterior, Siguiente y contador de páginas).
+   - Configura el estado inicial para mostrar 10 filas por página.
+
+4. UI REFINADA (TransactionPage.tsx):
+   - El encabezado solo debe mostrar el buscador y el botón "Nueva Transacción".
+   - Asegura que la tabla maneje correctamente el estado de "Sin resultados" cuando el filtro no coincida con ninguna transacción.
+
+# REQUISITOS DE CALIDAD
+- No dejes código muerto (Dead Code); si una función no se usa, elimínala.
+- El diseño debe mantenerse limpio y profesional siguiendo la estética de shadcn.
+- Todo el código debe ser Type-Safe.
+
+# FORMATO DE SALIDA
+1. Código actualizado de transactionService.ts (Limpio).
+2. Código actualizado de columns.tsx (Sin acciones).
+3. Código de TransactionPage.tsx con el buscador e integración de paginación.
+
+---
+
+# ROLE
+Actúa como Senior Frontend Developer. Tu tarea es sincronizar el frontend con el nuevo contrato de datos enviado por el Backend (Spring Boot Producer).
+
+# CONTEXTO DEL CAMBIO
+El objeto de transacción ha sido modificado en el backend. Ahora el JSON tiene la siguiente estructura:
+{
+   "transactionId": number,
+   "userId": string,
+   "type": "INCOME" | "EXPENSE",
+   "amount": number,
+   "category": string,
+   "date": string (ISO 8601),
+   "description": string
+}
+
+# TAREAS ESPECÍFICAS
+
+1. ACTUALIZACIÓN DE TIPOS (TypeScript):
+   - Modifica el archivo de tipos/interfaces (ej. src/shared/types/index.ts o el específico del módulo) para reflejar exactamente estos nombres de campos.
+
+2. REFACTORIZACIÓN DEL ADAPTER:
+   - Actualiza el adapter en src/modules/transactions/services/transactionService.ts para que mapee correctamente los datos de la API hacia la aplicación.
+   - Asegúrate de que no queden referencias a nombres de campos antiguos (como 'id' o 'user_id').
+
+3. AJUSTE DE COLUMNAS (Data Table):
+   - Actualiza src/modules/transactions/components/DataTable.tsx para que el accessorKey de cada columna coincida con los nuevos nombres del JSON (ej. de id a transactionId).
+
+4. FORMULARIO Y SCHEMAS:
+   - Verifica que el transactionSchema.ts (Zod) y el formulario coincidan con estos campos para que el POST sea exitoso.
+
+# REQUISITOS DE CALIDAD
+- Realiza una búsqueda global de los términos antiguos para asegurar que no queden errores de "undefined" en la UI.
+- Mantén el tipado estricto.
+
+# FORMATO DE SALIDA
+1. Código actualizado de la Interface de TypeScript.
+2. Código actualizado de transactionService.tsx.
+3. Código actualizado del servicio/adapter.
+
+---
+
+# ROLE
+Actúa como Senior Frontend Engineer experto en UI/UX. Tu objetivo es refactorizar el componente DataTable.tsx en src/modules/transactions/components/ para transformarlo en una interfaz de gestión completa.
+
+# CONTEXTO TÉCNICO
+- UI: shadcn/ui (DataTable, Popover, Command, Badge, Separator).
+- Lógica: TanStack Table (useReactTable).
+- Iconos: Lucide React (Filter, ListFilter, Plus).
+
+# TAREAS ESPECÍFICAS
+
+1. ENCABEZADO DE TABLA (Contexto):
+   - Añade una sección de encabezado dentro del contenedor de la tabla.
+   - Debe incluir un Título (ej: "Listado de Transacciones") y una breve descripción (ej: "Gestiona y visualiza tus movimientos financieros").
+
+2. BARRA DE HERRAMIENTAS (Toolbar):
+   - Implementa un área de herramientas (DataTableToolbar) sobre la tabla.
+   - Debe integrar el input de búsqueda ya existente (por descripción).
+   - Añade un Botón de "Filtros" que despliegue un Faceted Filter (filtro facetado) de shadcn.
+
+3. FILTROS AVANZADOS (Categoría y Tipo):
+   - Implementa filtros específicos para:
+     - **Tipo**: INCOME (Ingreso) / EXPENSE (Egreso).
+     - **Categoría**: (Basado en los valores únicos de tus datos, ej: Ocio, Comida, Salario).
+   - El filtro debe mostrar un Badge con el número de elementos seleccionados.
+
+4. BOTÓN DE LIMPIEZA:
+   - Si hay filtros activos, debe aparecer un botón "Reset" para limpiar todos los filtros de una sola vez.
+
+# REQUISITOS DE CALIDAD
+- No rompas la paginación ya existente.
+- Asegura que los filtros sean reactivos y actualicen la tabla instantáneamente.
+- El diseño debe ser limpio, alineado a la izquierda para el contexto y a la derecha para las acciones.
+
+# FORMATO DE SALIDA
+1. Código actualizado de DataTable.tsx.
+2. Código de subcomponentes de soporte si es necesario (ej: DataTableFacetedFilter.tsx).

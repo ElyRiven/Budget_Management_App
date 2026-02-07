@@ -4,6 +4,7 @@ import { DashboardLayout } from '../../shared/layouts/DashboardLayout';
 import { ProtectedRoute, PublicRoute } from '../../modules/auth';
 import { LoginPage } from '../../modules/auth/pages/LoginPage';
 import { RegisterPage } from '../../modules/auth/pages/RegisterPage';
+import { TransactionPage } from '@/modules/transactions/pages/TransactionPage';
 
 /**
  * Temporary placeholder components
@@ -67,8 +68,7 @@ export const AppRouter = () => {
                 <Route element={<ProtectedRoute />}>
                     <Route element={<DashboardLayout />}>
                         <Route path="/dashboard" element={<DashboardHome />} />
-                        <Route path="/transactions" element={<div>Transactions Module (TODO)</div>} />
-                        <Route path="/budgets" element={<div>Budgets Module (TODO)</div>} />
+                        <Route path="/transactions" element={<TransactionPage />} />
                         <Route path="/reports" element={<div>Reports Module (TODO)</div>} />
                     </Route>
                 </Route>

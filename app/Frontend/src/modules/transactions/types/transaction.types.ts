@@ -10,27 +10,23 @@ export interface TransactionResponse {
 }
 
 export interface TransactionItemResponse {
-    id: number;
+    transactionId: number;
     userId: string;
     amount: number;
-    type: 'income' | 'expense';
+    type: 'INCOME' | 'EXPENSE';
     category: string;
     description: string;
     date: string;
-    createdAt: string;
-    updatedAt: string;
 }
 
 export interface TransactionModel {
     id: number;
     userId: string;
     amount: number;
-    type: 'income' | 'expense';
+    type: 'INCOME' | 'EXPENSE';
     category: string;
     description: string;
     date: Date;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
 export interface TransactionReportModel {
@@ -44,4 +40,4 @@ export interface TransactionReportModel {
     updatedAt: Date;
 }
 
-export type TransactionFormData = Omit<TransactionModel, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
+export type TransactionFormData = Omit<TransactionModel, 'id' | 'userId'>;

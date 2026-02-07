@@ -69,7 +69,7 @@ export function NavHeaderUser() {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
+          <span>Configuración</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>
