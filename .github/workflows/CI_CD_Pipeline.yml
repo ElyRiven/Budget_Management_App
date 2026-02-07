@@ -1,4 +1,4 @@
-successfully downloaded text file (SHA: 8f0c443c0bed7de1d91bf702ad0e4383212a966a)name: CI/CD Pipeline - Build, Test & Deploy
+name: CI/CD Pipeline - Build, Test & Deploy
 
 on:
   push:
