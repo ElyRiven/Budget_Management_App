@@ -156,8 +156,8 @@ curl -X POST http://localhost:3001/transactions \
 Add screenshots to `docs/screenshots/` and reference them here:
 
 ```markdown
-<img>
-<img>
+![Dashboard Screenshot](docs/screenshots/dashboard.png)
+![Transaction View](docs/screenshots/transactions.png)
 ```
 
 ---
