@@ -14,9 +14,11 @@ export default defineConfig({
       reporter: ['text', 'lcov', 'html'],
       exclude: [
         'node_modules/',
+        'dist/',
         'setupTests.ts',
         '**/*.config.{js,ts}',
         '**/vite-env.d.ts',
+        '**/vitest.d.ts',
         'src/main.tsx',
       ],
     },
