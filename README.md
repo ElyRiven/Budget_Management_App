@@ -99,18 +99,37 @@ _Access the application at `http://localhost:5173` (or as specified by Vite)._
 
 ## 📂 Project Structure
 
-```text
-Budget_Management_App/
-├── .github/workflows/          # CI/CD Pipelines
-├── AI_Protocol/                # Methodology & AI Guidelines
-├── PROMPT_DOCUMENTATION/       # Prompt Library (Frontend, Backend, QA)
-├── app/
-│   ├── Frontend/               # React Application (Modular Monolith)
-│   └── backend-microservice/
-│       ├── transaction/        # Spring Boot Service (Producer)
-│       ├── report/             # Spring Boot Service (Consumer)
-│       └── docker-compose/     # Orchestration configs
-└── README.md                   # Project Entry Point
+```
+📁 Budget_Management_App
+├── 📂 AI_Protocol/                 # Methodology & AI Guidelines
+│   └── 📄 AI_Workflow.md
+├── 📂 Automatic Debugging/         # Debugging scripts & reports
+│   └── 📄 bug_report.md
+├── 📂 CI-CD Pipeline/              # CI/CD Configuration
+│   └── 📄 CI_CD_Pipeline.yml
+├── 📂 PROMPT_DOCUMENTATION/        # Prompt Library (Frontend, Backend, QA)
+│   ├── 📄 Front-End.md
+│   ├── 📄 Back-End.md
+│   └── 📄 QA.md
+├── 📂 Tests/                       # Test Suites (Mapped to .github/workflows)
+│   └── 📄 ci.yml
+├── 📂 app/                         # Main Application Code
+│   ├── 📂 Frontend/                # React Application (Modular Monolith)
+│   │   ├── 📂 src/
+│   │   ├── 📄 package.json
+│   │   ├── 📄 vite.config.ts
+│   │   └── 📄 vitest.config.ts
+│   └── 📂 backend-microservice/    # Spring Boot Microservices
+│       ├── 📂 transaction/         # Transaction Service (Producer)
+│       │   ├── 📂 src/
+│       │   ├── 📄 pom.xml
+│       │   └── 📄 Dockerfile
+│       ├── 📂 report/              # Report Service (Consumer)
+│       │   ├── 📂 src/
+│       │   ├── 📄 pom.xml
+│       │   └── 📄 Dockerfile
+│       └── 📂 docker-compose/      # Orchestration configs
+└── 📄 README.md                    # Project Entry Point
 ```
 
 ---
