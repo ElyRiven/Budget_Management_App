@@ -10,7 +10,7 @@
 - **Anti-pattern Addressed:** Controller-orchestrated integration in `TransactionController#create`, which coordinates persistence and message publishing directly (see `audit.md` item 1).
 - **Proposed Solution:** Add a `TransactionWorkflowFacade` that exposes a single `createTransaction` method. The facade delegates to `TransactionService` and `TransactionMessageProducer` internally, so the controller only depends on the facade and focuses on HTTP concerns.
 - **Architectural Justification:** A facade decouples the web layer from messaging infrastructure, aligning with SRP and clean architecture boundaries. It simplifies controller logic, reduces coupling, and makes it easier to change messaging or persistence workflows without modifying controller code, improving maintainability and readability.
-- **Comparison:** The previous structure was **tightly coupled orchestration** because the controller knew about both persistence and RabbitMQ publishing, but this pattern improves it by **introducing a single façade boundary** that hides integration details and keeps the API layer lean.
+- **Comparison:** The previous structure was **tightly coupled orchestration** because the controller knew about both persistence and RabbitMQ publishing, but this pattern improves it by **introducing a single facade boundary** that hides integration details and keeps the API layer lean.
 
 3. **Behavioral: Strategy**
 - **Anti-pattern Addressed:** Conditional update logic in `ReportServiceImpl.updateReport` driven by `TransactionType` branching (see `audit.md` item 2).
