@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance, AxiosError, type InternalAxiosRequestConfig, type AxiosResponse } from 'axios';
+import { APP_CONFIG } from '../config/app.config';
 
 export type ServiceType = 'transactions' | 'reports';
 
@@ -13,7 +14,7 @@ class HttpClient {
         const baseURL = this.getBaseURL(serviceType);
         const instance: AxiosInstance = axios.create({
             baseURL,
-            timeout: 15000,
+            timeout: APP_CONFIG.API_TIMEOUT,
             headers: {
                 'Content-Type': 'application/json',
             },

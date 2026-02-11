@@ -15,7 +15,7 @@ export const transactionAdapter = (response: TransactionItemResponse): Transacti
     };
 };
 
-export const createTransactionAdapter = (data: TransactionModel): any => {
+export const createTransactionAdapter = (data: TransactionModel): TransactionItemResponse => {
     return {
         transactionId: data.id, 
         userId: data.userId,

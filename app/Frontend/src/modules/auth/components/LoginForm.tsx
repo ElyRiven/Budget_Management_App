@@ -34,8 +34,9 @@ export const LoginForm = () => {
         try {
             await loginWithEmail(data.email, data.password);
             navigate('/dashboard');
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+            setError(errorMessage);
         } finally {
             setIsLoading(false);
         }
@@ -48,8 +49,9 @@ export const LoginForm = () => {
         try {
             await loginWithGoogle();
             navigate('/dashboard');
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+            setError(errorMessage);
         } finally {
             setIsGoogleLoading(false);
         }

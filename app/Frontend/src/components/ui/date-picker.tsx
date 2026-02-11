@@ -7,9 +7,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { addDays, format } from "@/lib/date-utils"
+import { addDays, format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
-import { type DateRange as CustomDateRange } from "@/lib/date-utils"
 import { type DateRange } from "react-day-picker"
 
 export function DatePickerWithRange({
@@ -18,22 +17,22 @@ export function DatePickerWithRange({
   onChange,
 }: {
   className?: string
-  value?: CustomDateRange
-  onChange?: (range: CustomDateRange | undefined) => void
+  value?: DateRange
+  onChange?: (range: DateRange | undefined) => void
 }) {
-  const [date, setDate] = React.useState<DateRange | undefined>((value as DateRange) || {
+  const [date, setDate] = React.useState<DateRange | undefined>(value || {
     from: new Date(new Date().getFullYear(), 0, 20),
     to: addDays(new Date(new Date().getFullYear(), 0, 20), 20),
   })
 
   React.useEffect(() => {
     if (value !== undefined) {
-      setDate(value as DateRange)
+      setDate(value)
     }
   }, [value])
 
   React.useEffect(() => {
-    onChange?.(date as CustomDateRange)
+    onChange?.(date)
   }, [date, onChange])
 
   return (

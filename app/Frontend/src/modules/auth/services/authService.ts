@@ -8,6 +8,7 @@ import {
     type UserCredential,
 } from 'firebase/auth';
 import { auth } from '../../../core/config/firebase.config.js';
+import { createAuthError, type AuthError } from '@/shared/types/errors';
 
 /**
  * Login with Email and Password
@@ -20,8 +21,8 @@ export const loginWithEmail = async (
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log('[Auth Service] Login successful:', userCredential.user.email);
         return userCredential;
-    } catch (error: any) {
-        console.error('[Auth Service] Login error:', error.code, error.message);
+    } catch (error: unknown) {
+        console.error('[Auth Service] Login error:', error);
         throw mapFirebaseError(error);
     }
 };
@@ -35,8 +36,8 @@ export const loginWithGoogle = async (): Promise<UserCredential> => {
         const userCredential = await signInWithPopup(auth, provider);
         console.log('[Auth Service] Google login successful:', userCredential.user.email);
         return userCredential;
-    } catch (error: any) {
-        console.error('[Auth Service] Google login error:', error.code, error.message);
+    } catch (error: unknown) {
+        console.error('[Auth Service] Google login error:', error);
         throw mapFirebaseError(error);
     }
 };
@@ -58,8 +59,8 @@ export const registerWithEmail = async (
 
         console.log('[Auth Service] Registration successful:', userCredential.user.email);
         return userCredential;
-    } catch (error: any) {
-        console.error('[Auth Service] Registration error:', error.code, error.message);
+    } catch (error: unknown) {
+        console.error('[Auth Service] Registration error:', error);
         throw mapFirebaseError(error);
     }
 };
@@ -71,8 +72,8 @@ export const logout = async (): Promise<void> => {
     try {
         await signOut(auth);
         console.log('[Auth Service] Logout successful');
-    } catch (error: any) {
-        console.error('[Auth Service] Logout error:', error.code, error.message);
+    } catch (error: unknown) {
+        console.error('[Auth Service] Logout error:', error);
         throw new Error('Error al cerrar sesión');
     }
 };
@@ -80,8 +81,9 @@ export const logout = async (): Promise<void> => {
 /**
  * Map Firebase errors to user-friendly messages
  */
-const mapFirebaseError = (error: any): Error => {
-    const errorCode = error.code;
+const mapFirebaseError = (error: unknown): Error => {
+    const authError = createAuthError(error);
+    const errorCode = authError.code;
 
     const errorMessages: Record<string, string> = {
         'auth/invalid-email': 'El correo electrónico no es válido',

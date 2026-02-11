@@ -3,6 +3,7 @@ import { getTransactionsByUser, createTransaction } from "../services/transactio
 import type { TransactionFormData } from "../types/transaction.types"
 import { toast } from "sonner"
 import { useUserStore } from "@/modules/auth"
+import { createApiError, type ApiError } from "@/shared/types/errors"
 
 export function useTransactions(period?: string) {
   const { user} = useUserStore()
@@ -32,8 +33,9 @@ export function useTransactions(period?: string) {
       queryClient.invalidateQueries({ queryKey: ["transactions"] })
       toast.success("Transacción creada con éxito")
     },
-    onError: (error: any) => {
-      toast.error(`Error al crear transacción: ${error.message}`)
+    onError: (error: unknown) => {
+      const apiError: ApiError = createApiError(error)
+      toast.error(`Error al crear transacción: ${apiError.message}`)
     },
   })
 

@@ -6,31 +6,7 @@ import { LoginPage } from '../../modules/auth/pages/LoginPage';
 import { RegisterPage } from '../../modules/auth/pages/RegisterPage';
 import { TransactionPage } from '@/modules/transactions/pages/TransactionPage';
 import { ReportsPage } from '@/modules/reports/pages/ReportsPage';
-
-/**
- * Temporary placeholder components
- * These will be replaced by actual module components
- */
-const HomePage = () => (
-    <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Bienvenido a Finanzas Personales
-        </h1>
-        <p className="text-gray-600">
-            Sistema de gestión financiera personal
-        </p>
-        <div className="mt-8">
-            <a
-                href="/login"
-                className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
-            >
-                Iniciar Sesión
-            </a>
-        </div>
-    </div>
-);
-
-
+import { HomePage } from '@/modules/home/pages/HomePage';
 
 export const AppRouter = () => {
     return (
