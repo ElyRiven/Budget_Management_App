@@ -1,14 +1,14 @@
-import {
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    GoogleAuthProvider,
-    signOut,
-    createUserWithEmailAndPassword,
-    updateProfile,
-    type UserCredential,
-} from 'firebase/auth';
-import { auth } from '../../../core/config/firebase.config.js';
-import { createAuthError, type AuthError } from '@/shared/types/errors';
+/**
+ * Auth Service
+ * Business logic for authentication operations
+ * Now uses the abstraction layer instead of Firebase directly
+ */
+
+import { firebaseAuthAdapter } from '../adapters/FirebaseAuthAdapter';
+import type { AuthUser, RegisterData } from '../interfaces/IAuthProvider';
+
+// Get the auth provider (could be injected for DI)
+const authProvider = firebaseAuthAdapter;
 
 /**
  * Login with Email and Password
@@ -16,30 +16,15 @@ import { createAuthError, type AuthError } from '@/shared/types/errors';
 export const loginWithEmail = async (
     email: string,
     password: string
-): Promise<UserCredential> => {
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log('[Auth Service] Login successful:', userCredential.user.email);
-        return userCredential;
-    } catch (error: unknown) {
-        console.error('[Auth Service] Login error:', error);
-        throw mapFirebaseError(error);
-    }
+): Promise<AuthUser> => {
+    return authProvider.signInWithEmail(email, password);
 };
 
 /**
  * Login with Google
  */
-export const loginWithGoogle = async (): Promise<UserCredential> => {
-    try {
-        const provider = new GoogleAuthProvider();
-        const userCredential = await signInWithPopup(auth, provider);
-        console.log('[Auth Service] Google login successful:', userCredential.user.email);
-        return userCredential;
-    } catch (error: unknown) {
-        console.error('[Auth Service] Google login error:', error);
-        throw mapFirebaseError(error);
-    }
+export const loginWithGoogle = async (): Promise<AuthUser> => {
+    return authProvider.signInWithGoogle();
 };
 
 /**
@@ -49,57 +34,18 @@ export const registerWithEmail = async (
     displayName: string,
     email: string,
     password: string
-): Promise<UserCredential> => {
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-        await updateProfile(userCredential.user, {
-            displayName,
-        });
-
-        console.log('[Auth Service] Registration successful:', userCredential.user.email);
-        return userCredential;
-    } catch (error: unknown) {
-        console.error('[Auth Service] Registration error:', error);
-        throw mapFirebaseError(error);
-    }
+): Promise<AuthUser> => {
+    const registerData: RegisterData = {
+        displayName,
+        email,
+        password,
+    };
+    return authProvider.signUp(registerData);
 };
 
 /**
  * Logout
  */
 export const logout = async (): Promise<void> => {
-    try {
-        await signOut(auth);
-        console.log('[Auth Service] Logout successful');
-    } catch (error: unknown) {
-        console.error('[Auth Service] Logout error:', error);
-        throw new Error('Error al cerrar sesión');
-    }
-};
-
-/**
- * Map Firebase errors to user-friendly messages
- */
-const mapFirebaseError = (error: unknown): Error => {
-    const authError = createAuthError(error);
-    const errorCode = authError.code;
-
-    const errorMessages: Record<string, string> = {
-        'auth/invalid-email': 'El correo electrónico no es válido',
-        'auth/user-disabled': 'Esta cuenta ha sido deshabilitada',
-        'auth/user-not-found': 'No existe una cuenta con este correo',
-        'auth/wrong-password': 'Contraseña incorrecta',
-        'auth/invalid-credential': 'Credenciales incorrectas',
-        'auth/too-many-requests': 'Demasiados intentos. Intenta más tarde',
-        'auth/network-request-failed': 'Error de conexión. Verifica tu internet',
-        'auth/popup-closed-by-user': 'Inicio de sesión cancelado',
-        'auth/cancelled-popup-request': 'Inicio de sesión cancelado',
-        'auth/email-already-in-use': 'El correo electrónico ya está en uso',
-        'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres',
-        'auth/operation-not-allowed': 'El registro con correo y contraseña está deshabilitado',
-    };
-
-    const message = errorMessages[errorCode] || 'Error de autenticación. Intenta de nuevo.';
-    return new Error(message);
+    return authProvider.signOut();
 };

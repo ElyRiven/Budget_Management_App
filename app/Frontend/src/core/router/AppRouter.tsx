@@ -7,31 +7,47 @@ import { RegisterPage } from '../../modules/auth/pages/RegisterPage';
 import { TransactionPage } from '@/modules/transactions/pages/TransactionPage';
 import { ReportsPage } from '@/modules/reports/pages/ReportsPage';
 import { HomePage } from '@/modules/home/pages/HomePage';
+import { ErrorBoundary } from '@/shared/components/ErrorBoundary';
 
 export const AppRouter = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                {/* Public Routes */}
-                <Route element={<PublicRoute />}>
-                    <Route element={<PublicLayout />}>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
+        <ErrorBoundary>
+            <BrowserRouter>
+                <Routes>
+                    {/* Public Routes */}
+                    <Route element={<PublicRoute />}>
+                        <Route element={<PublicLayout />}>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="/register" element={<RegisterPage />} />
+                        </Route>
                     </Route>
-                </Route>
 
-                {/* Protected Routes */}
-                <Route element={<ProtectedRoute />}>
-                    <Route element={<DashboardLayout />}>
-                        <Route path="/dashboard" element={<ReportsPage />} />
-                        <Route path="/transactions" element={<TransactionPage />} />
-                        
+                    {/* Protected Routes */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route element={<DashboardLayout />}>
+                            <Route 
+                                path="/dashboard" 
+                                element={
+                                    <ErrorBoundary>
+                                        <ReportsPage />
+                                    </ErrorBoundary>
+                                } 
+                            />
+                            <Route 
+                                path="/transactions" 
+                                element={
+                                    <ErrorBoundary>
+                                        <TransactionPage />
+                                    </ErrorBoundary>
+                                } 
+                            />
+                        </Route>
                     </Route>
-                </Route>
 
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-        </BrowserRouter>
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </BrowserRouter>
+        </ErrorBoundary>
     );
 };

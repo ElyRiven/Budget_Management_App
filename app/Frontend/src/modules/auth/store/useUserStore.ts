@@ -1,27 +1,27 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { type User as FirebaseUser, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../core/config/firebase.config.js';
+import type { AuthUser } from '../interfaces/IAuthProvider';
 
 interface UserState {
-    user: FirebaseUser | null;
+    user: AuthUser | null;
     isAuthenticated: boolean;
     isLoading: boolean;
 
-    setUser: (user: FirebaseUser | null) => void;
+    setUser: (user: AuthUser | null) => void;
+    setLoading: (loading: boolean) => void;
     logout: () => void;
-
-    initAuthListener: () => void;
 }
 
 /**
  * User Store
- * Manages authentication state and listens to Firebase Auth changes
+ * Manages authentication state
+ * NOTE: No longer initializes Firebase listener on module load
+ * Initialization is now explicit via AuthInitializer component
  */
 export const useUserStore = create<UserState>()(
     devtools(
         persist(
-            (set, get) => ({
+            (set) => ({
                 user: null,
                 isAuthenticated: false,
                 isLoading: true,
@@ -33,35 +33,20 @@ export const useUserStore = create<UserState>()(
                         isLoading: false,
                     }),
 
-                logout: async () => {
-                    try {
-                        await auth.signOut();
-                        set({ user: null, isAuthenticated: false });
-                    } catch (error) {
-                        console.error('[Auth] Logout error:', error);
-                    }
-                },
+                setLoading: (loading) =>
+                    set({ isLoading: loading }),
 
-                initAuthListener: () => {
-                    onAuthStateChanged(auth, (user) => {
-                        get().setUser(user);
-                    });
+                logout: () => {
+                    set({ user: null, isAuthenticated: false });
                 },
             }),
             {
                 name: 'user-storage',
                 partialize: (state) => ({
-                    user: state.user ? {
-                        uid: state.user.uid,
-                        email: state.user.email,
-                        displayName: state.user.displayName,
-                        photoURL: state.user.photoURL,
-                    } : null,
+                    user: state.user,
                 }),
             }
         ),
         { name: 'User Store' }
     )
 );
-
-useUserStore.getState().initAuthListener();
