@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import {
   Table,
   TableBody,
@@ -13,7 +13,8 @@ import { DataTableToolbar } from "./DataTableToolbar"
 import type { TransactionModel } from "../types/transaction.types"
 import { formatCurrency } from "@/shared/utils/format"
 import { getCategoryColor } from "@/core/config/theme.config"
-import { APP_CONFIG } from "@/core/config/app.config"
+import { usePagination } from "@/shared/hooks/usePagination"
+import { useTableFilters } from "@/shared/hooks/useTableFilters"
 
 interface DataTableProps {
   data: TransactionModel[]
@@ -21,11 +22,29 @@ interface DataTableProps {
 }
 
 export function DataTable({ data, onCreateTransaction }: DataTableProps) {
-  const [pageIndex, setPageIndex] = useState(0)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedType, setSelectedType] = useState<Set<string>>(new Set())
-  const [selectedCategory, setSelectedCategory] = useState<Set<string>>(new Set())
-  const pageSize = APP_CONFIG.DEFAULT_PAGE_SIZE
+  // Use custom hooks for filtering and pagination
+  const {
+    filteredData,
+    searchQuery,
+    setSearchQuery,
+    selectedFilters,
+    setFilter,
+    clearAllFilters,
+  } = useTableFilters({
+    data: Array.isArray(data) ? data : [],
+    searchFields: ['description'],
+  })
+
+  const {
+    paginatedData,
+    pageIndex,
+    totalPages,
+    nextPage,
+    previousPage,
+    resetPage,
+  } = usePagination({
+    data: filteredData,
+  })
 
   // Get unique categories from data
   const categories = useMemo(() => {
@@ -34,51 +53,28 @@ export function DataTable({ data, onCreateTransaction }: DataTableProps) {
     return uniqueCategories.sort()
   }, [data])
 
-  // Filter data based on all criteria
-  const filteredData = useMemo(() => {
-    if (!Array.isArray(data)) return []
-    return data.filter(transaction => {
-      const matchesSearch = transaction.description.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesType = selectedType.size === 0 || selectedType.has(transaction.type)
-      const matchesCategory = selectedCategory.size === 0 || selectedCategory.has(transaction.category)
-      return matchesSearch && matchesType && matchesCategory
-    })
-  }, [data, searchQuery, selectedType, selectedCategory])
-
-  // Calculate pagination
-  const startIndex = pageIndex * pageSize
-  const endIndex = startIndex + pageSize
-  const paginatedData = filteredData.slice(startIndex, endIndex)
-  const totalPages = Math.ceil(filteredData.length / pageSize)
-
-  const handlePageChange = (newPageIndex: number) => {
-    if (newPageIndex >= 0 && newPageIndex < totalPages) {
-      setPageIndex(newPageIndex)
-    }
-  }
-
-  const handleResetFilters = () => {
-    setSearchQuery("")
-    setSelectedType(new Set())
-    setSelectedCategory(new Set())
-    setPageIndex(0)
-  }
-
-  // Reset page when filters change
   const handleSearchChange = (value: string) => {
     setSearchQuery(value)
-    setPageIndex(0)
+    resetPage()
   }
 
   const handleTypeFilterChange = (values: Set<string>) => {
-    setSelectedType(values)
-    setPageIndex(0)
+    setFilter('type', values)
+    resetPage()
   }
 
   const handleCategoryFilterChange = (values: Set<string>) => {
-    setSelectedCategory(values)
-    setPageIndex(0)
+    setFilter('category', values)
+    resetPage()
   }
+
+  const handleResetFilters = () => {
+    clearAllFilters()
+    resetPage()
+  }
+
+  const selectedType = selectedFilters.get('type') || new Set<string>()
+  const selectedCategory = selectedFilters.get('category') || new Set<string>()
 
   return (
     <div className="space-y-4">
@@ -186,7 +182,7 @@ export function DataTable({ data, onCreateTransaction }: DataTableProps) {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(pageIndex - 1)}
+              onClick={previousPage}
               disabled={pageIndex === 0}
             >
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4">
@@ -202,7 +198,7 @@ export function DataTable({ data, onCreateTransaction }: DataTableProps) {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(pageIndex + 1)}
+              onClick={nextPage}
               disabled={pageIndex === totalPages - 1}
             >
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4">

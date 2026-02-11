@@ -6,25 +6,20 @@ import { useUserStore } from "@/modules/auth"
 import { createApiError, type ApiError } from "@/shared/types/errors"
 
 export function useTransactions(period?: string) {
-  const { user} = useUserStore()
+  const { user } = useUserStore()
   const queryClient = useQueryClient()
-
-  // Return default values when no user
-  if (!user) {
-    return {
-      transactions: [],
-      isLoading: false,
-      error: null,
-      createTransaction: () => {},
-      isCreating: false,
-    }
-  }
 
   const transactionsQuery = useQuery({
     queryKey: ["transactions", period],
-    queryFn: () => getTransactionsByUser(user.uid, period),
+    queryFn: () => {
+      if (!user) {
+        return Promise.resolve([])
+      }
+      return getTransactionsByUser(user.uid, period)
+    },
     staleTime: 1000 * 60 * 5,
     retry: 2,
+    enabled: !!user,
   })
 
   const createTransactionMutation = useMutation({
